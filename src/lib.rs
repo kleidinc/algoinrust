@@ -1,17 +1,32 @@
+use std::fmt;
+
 mod bubblesort;
 mod quicksort;
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub struct Displayable<T>([T]);
+
+impl<T: fmt::Display> fmt::Display for Displayable<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let vec = &self.0;
+        write!(f, "[")?;
+        for (index, element) in vec.iter().enumerate() {
+            if index != 0 {
+                write!(f, " ,")?;
+            }
+            write!(f, "{}", element)?;
+        }
+        write!(f, "]")
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::bubblesort::*;
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let mut unsorted = vec![9, 1, 5];
+        bubblesort(&mut unsorted);
+        assert_eq!(&unsorted, &[1, 5, 9]);
     }
 }

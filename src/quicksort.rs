@@ -1,3 +1,3 @@
-pub fn quicksort<T>(list: &mut [T]) {
+pub fn quicksort<T>(list: &[T]) {
     todo!();
 }
