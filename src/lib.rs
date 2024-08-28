@@ -1,12 +1,5 @@
-pub trait Sorter<T> {
-    fn sort(&self, slice: &mut [T])
-    where
-        T: Ord;
-}
-
 mod bubblesort;
-
-pub use bubblesort::BubbleSort;
+mod quicksort;
 
 // #[cfg(test)]
 // mod tests {

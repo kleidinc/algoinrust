@@ -1,17 +1,11 @@
-use super::Sorter;
-
-pub struct BubbleSort;
-
-impl<T: Ord> Sorter<T> for BubbleSort {
-    fn sort(&self, slice: &mut [T]) {
-        let mut swapped = true;
-        while swapped {
-            swapped = false;
-            for i in 0..slice.len() - 1 {
-                if slice[i] > slice[i + 1] {
-                    slice.swap(i, i + 1);
-                    swapped = true;
-                }
+fn bubblesort<T: Ord>(slice: &mut [T]) {
+    let mut swapped = true;
+    while swapped {
+        swapped = false;
+        for i in 0..slice.len() - 1 {
+            if slice[i] > slice[i + 1] {
+                slice.swap(i, i + 1);
+                swapped = true
             }
         }
     }
@@ -19,7 +13,7 @@ impl<T: Ord> Sorter<T> for BubbleSort {
 
 #[test]
 fn bubblesort_works() {
-    let mut things = vec![9, 1, 5, 7];
-    BubbleSort.sort(&mut things);
-    assert_eq!(things, &[1, 5, 7, 9]);
+    let mut testlist = vec![9, 7, 3, 11];
+    bubblesort(&mut testlist);
+    assert_eq!(testlist, &[3, 7, 9, 11]);
 }
