@@ -1,4 +1,5 @@
 mod bubblesort;
+mod countingsort;
 mod quicksort;
 
 // #[cfg(test)]
