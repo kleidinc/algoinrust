@@ -1,7 +1,7 @@
 // Countingsort
 // [0,10,8,10,1,1,3,3,3,3,2,5]
 //
-fn countingsort(slice: &mut [u128]) {
+fn countingsort(slice: &mut [i128]) {
     // 1. Get the max number in the slice
     let mut max = 0;
     for element in slice.iter() {
@@ -30,7 +30,7 @@ fn countingsort(slice: &mut [u128]) {
         counts[index] = counts[index - 1];
     }
     // 5. Use the final array to create a new vector with the sorted values
-    let mut sorted: Vec<u128> = Vec::new();
+    let mut sorted: Vec<i128> = Vec::new();
     // you need to loop over the counts and change the values
     let mut occurences;
 
@@ -48,11 +48,25 @@ fn countingsort(slice: &mut [u128]) {
 
     // 6. Repopulate the given slice in place by overwriting the values in the slice
     // with new values
+    // Make a temporary copy of the input slice for reference, read that copied slice
+    // and update the input slice
+    // Reading should be done from end to start
+    let mut slice_copy: Vec<i128> = Vec::new();
+    slice_copy.copy_from_slice(slice);
+    for (_index, element) in slice_copy.iter().enumerate().rev() {
+        // use the element as the index in counts
+        if counts[*element as usize] > 0 {
+            // take the position of the element from the counts index
+            slice[*element as usize] = *element;
+            // decrease the count of element by one
+            counts[*element as usize] -= 1;
+        }
+    }
 }
 
 #[test]
 fn countingsort_works() {
-    let mut slice: Vec<u128> = vec![0, 10, 8, 10, 1, 1, 3, 3, 3, 3, 2, 5];
+    let mut slice: Vec<i128> = vec![0, 10, 8, 10, 1, 1, 3, 3, 3, 3, 2, 5];
     countingsort(&mut slice);
     assert_eq!(slice, &[0, 1, 1, 2, 3, 3, 3, 3, 5, 9, 10]);
 }
