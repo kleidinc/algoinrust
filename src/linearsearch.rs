@@ -7,9 +7,17 @@
 // Use the following signature:
 // fn linear_search(vec: &Vec<i32>, target: i32) -> (i32,i32) {}
 
+use std::i32;
+
 fn linear_search(vec: &Vec<i32>, target: i32) -> (i32, i32) {
-    //
-    (1, 1)
+    let mut result: (i32, i32) = (-1, 0);
+    for (index, element) in vec.iter().enumerate() {
+        result.1 += 1;
+        if *element == target {
+            result.0 = index as i32;
+        }
+    }
+    result
 }
 
 #[test]
