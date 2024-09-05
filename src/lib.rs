@@ -1,3 +1,4 @@
+mod binarysearch;
 mod bubblesort;
 mod countingsort;
 mod linearsearch;
